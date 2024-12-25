@@ -22,7 +22,7 @@ class CustomDropdown extends HookWidget {
     final selectedValue = useState<String?>(initialValue);
 
     return FormField<String>(
-      validator:(value)=> validator?.call(value),
+      validator: (value) => validator?.call(value),
       builder: (FormFieldState<String> state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,11 +43,12 @@ class CustomDropdown extends HookWidget {
                   hint: hint != null
                       ? Text(
                           hint!,
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xffA8B1BE),
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xffA8B1BE),
+                                  ),
                         )
                       : null,
                   items: items
@@ -55,7 +56,10 @@ class CustomDropdown extends HookWidget {
                             value: item,
                             child: Text(
                               item,
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w400,
                                     color: Colors.black,

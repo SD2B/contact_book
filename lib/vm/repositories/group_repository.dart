@@ -4,7 +4,8 @@ class GroupRepository {
   static Future<List<String>> getTask() async {
     List<String> taskList = [];
     try {
-      List<Map<String, dynamic>> data = await LocalStorage.get(DBTable.contactGroups);
+      List<Map<String, dynamic>> data =
+          await LocalStorage.get(DBTable.contactGroups);
       taskList = data.map((e) => e["group_name"].toString()).toList();
       return taskList;
     } catch (e) {
@@ -23,7 +24,8 @@ class GroupRepository {
 
   static Future<bool> deleteTask(String groupName) async {
     try {
-      await LocalStorage.delete(DBTable.contactGroups, where: {"group_name": groupName});
+      await LocalStorage.delete(DBTable.contactGroups,
+          where: {"group_name": groupName});
       return true;
     } catch (e) {
       return false;

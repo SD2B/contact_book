@@ -54,9 +54,13 @@ class CustomTextField extends HookWidget {
 
     return SizedBox(
       width: width,
-      height: (errorText.value != null && errorText.value != "") ? (height ?? 50) + 20 : (height ?? 50),
+      height: (errorText.value != null && errorText.value != "")
+          ? (height ?? 50) + 20
+          : (height ?? 50),
       child: TextFormField(
-        textCapitalization:firstLetterCapital? TextCapitalization.sentences: TextCapitalization.none,
+        textCapitalization: firstLetterCapital
+            ? TextCapitalization.sentences
+            : TextCapitalization.none,
         style: Theme.of(context).textTheme.bodySmall?.copyWith(
               fontSize: 16,
               fontWeight: FontWeight.w400,
@@ -120,7 +124,9 @@ class CustomTextField extends HookWidget {
               (isPassword
                   ? IconButton(
                       icon: Icon(
-                        obscureText.value ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                        obscureText.value
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined,
                         color: Colors.grey,
                       ),
                       onPressed: () {

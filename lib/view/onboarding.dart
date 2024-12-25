@@ -8,10 +8,10 @@ class Onboarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorCode.colorList(context).secondary,
       body: Center(
         child: SpinKitChasingDots(
-          color: ColorCode.colorList(context).bgColor,
+          color: ColorCode.colorList(context).middlePrimary,
         ),
       ),
     );

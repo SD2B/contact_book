@@ -9,7 +9,6 @@ class SlideableTileWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final itemList = useState(contactList);
-  
 
     return ListView.builder(
       shrinkWrap: true,
@@ -27,7 +26,8 @@ class SlideableTileWidget extends HookWidget {
                 builder: (BuildContext context) {
                   return AlertDialog(
                     title: const Text("Delete"),
-                    content: const Text("Are you sure you want to delete this cart?"),
+                    content: const Text(
+                        "Are you sure you want to delete this cart?"),
                     actions: <Widget>[
                       ElevatedButton(
                         onPressed: () => Navigator.of(context).pop(true),
@@ -47,7 +47,8 @@ class SlideableTileWidget extends HookWidget {
                 builder: (BuildContext context) {
                   return AlertDialog(
                     title: const Text("Save"),
-                    content: const Text("Are you sure you want to save this cart?"),
+                    content:
+                        const Text("Are you sure you want to save this cart?"),
                     actions: <Widget>[
                       ElevatedButton(
                         onPressed: () => Navigator.of(context).pop(true),

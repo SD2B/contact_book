@@ -28,7 +28,24 @@ class CustomButton extends StatelessWidget {
       onTap: () {
         onTap();
       },
-      child: width == null ? Expanded(child: CustomButtonCard(width: width, height: height, buttonColor: buttonColor, textColor: textColor, text: text, isLoading: isLoading, style: style)) : CustomButtonCard(width: width, height: height, buttonColor: buttonColor, textColor: textColor, text: text, isLoading: isLoading, style: style),
+      child: width == null
+          ? Expanded(
+              child: CustomButtonCard(
+                  width: width,
+                  height: height,
+                  buttonColor: buttonColor,
+                  textColor: textColor,
+                  text: text,
+                  isLoading: isLoading,
+                  style: style))
+          : CustomButtonCard(
+              width: width,
+              height: height,
+              buttonColor: buttonColor,
+              textColor: textColor,
+              text: text,
+              isLoading: isLoading,
+              style: style),
     );
   }
 }
@@ -57,7 +74,8 @@ class CustomButtonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? SizedBox(height: height ?? 40, width: width, child: const LoadingWidget())
+        ? SizedBox(
+            height: height ?? 40, width: width, child: const LoadingWidget())
         : Container(
             height: height ?? 40,
             width: width,

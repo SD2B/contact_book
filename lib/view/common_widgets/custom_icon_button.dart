@@ -8,7 +8,14 @@ class CustomIconButton extends StatelessWidget {
   final Color? iconColor;
   final double? buttonSize;
   final double? iconSize;
-  const CustomIconButton({super.key, required this.icon, required this.onTap, this.buttonColor, this.iconColor, this.buttonSize, this.iconSize});
+  const CustomIconButton(
+      {super.key,
+      required this.icon,
+      required this.onTap,
+      this.buttonColor,
+      this.iconColor,
+      this.buttonSize,
+      this.iconSize});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +28,9 @@ class CustomIconButton extends StatelessWidget {
       child: Container(
         height: buttonSize ?? 38,
         width: buttonSize ?? 38,
-        decoration: BoxDecoration(shape: BoxShape.circle, color: buttonColor ?? ColorCode.colorList(context).primary),
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: buttonColor ?? ColorCode.colorList(context).primary),
         child: Icon(icon, color: iconColor ?? Colors.white, size: iconSize),
       ),
     );

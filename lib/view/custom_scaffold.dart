@@ -15,12 +15,23 @@ class CustomScaffold extends StatelessWidget {
   final Widget? trailingWidget;
   final PreferredSizeWidget? appBar;
 
-  const CustomScaffold({super.key, required this.child, this.backgroundColor, this.enableBack, this.isClose = false, this.appBarTitle, this.isHome = false, this.onBackCalled, this.trailingWidget, this.appBar});
+  const CustomScaffold(
+      {super.key,
+      required this.child,
+      this.backgroundColor,
+      this.enableBack,
+      this.isClose = false,
+      this.appBarTitle,
+      this.isHome = false,
+      this.onBackCalled,
+      this.trailingWidget,
+      this.appBar});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor ?? const Color.fromARGB(255, 215, 242, 252),
+      backgroundColor:
+          backgroundColor ?? const Color.fromARGB(255, 215, 242, 252),
       appBar: appBar ??
           (enableBack == true
               ? AppBar(
@@ -42,7 +53,10 @@ class CustomScaffold extends StatelessWidget {
                       ? SizedBox.shrink()
                       : Text(
                           "$appBarTitle",
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.copyWith(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w500,
                                 color: ColorCode.colorList(context).secondary,

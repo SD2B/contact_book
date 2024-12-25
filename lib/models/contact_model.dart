@@ -7,13 +7,12 @@ class ContactModel with _$ContactModel {
   const factory ContactModel({
     int? id,
     String? name,
-   @JsonKey(name: "group_name") String? group,
+    @JsonKey(name: "group_name") String? group,
     String? phone,
     String? email,
     String? image,
   }) = _ContactModel;
 
-  factory ContactModel.fromJson(Map<String, dynamic> json) => _$ContactModelFromJson(json);
+  factory ContactModel.fromJson(Map<String, dynamic> json) =>
+      _$ContactModelFromJson(json);
 }
-
-

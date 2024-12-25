@@ -16,7 +16,9 @@ class GroupSelection extends HookWidget {
     return InkWell(
       onTap: () async {
         await groupVM.getGroups();
-        showDialog(context: context, builder: (context) => AddGroupPopup(model: model));
+        showDialog(
+            context: context,
+            builder: (context) => AddGroupPopup(model: model));
       },
       child: Container(
         height: 50,
@@ -34,13 +36,17 @@ class GroupSelection extends HookWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           spacing: 15.5,
           children: [
-            Icon(Icons.group, size: 20, color: ColorCode.colorList(context).middleSecondary!),
+            Icon(Icons.group,
+                size: 20, color: ColorCode.colorList(context).middleSecondary!),
             Text(
-              (model.value.group ?? "Select group").toTitleCase(),
+              (model.value.group ?? "Select group (optional)").toTitleCase(),
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
-                    color: (model.value.group != null && model.value.group != "") ? ColorCode.colorList(context).customTextColor : const Color(0xffA8B1BE),
+                    color:
+                        (model.value.group != null && model.value.group != "")
+                            ? ColorCode.colorList(context).customTextColor
+                            : const Color(0xffA8B1BE),
                   ),
             ),
           ],

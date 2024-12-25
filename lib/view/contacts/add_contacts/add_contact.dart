@@ -7,6 +7,7 @@ import 'package:contact_book/view/contacts/elements/group_selection.dart';
 import 'package:contact_book/view/custom_scaffold.dart';
 import 'package:contact_book/vm/contact_vm.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 
@@ -38,7 +39,9 @@ class AddContact extends HookWidget {
                 model.value = model.value.copyWith(
                   name: nameController.text,
                   phone: phoneController.text,
-                  email: emailController.text.isNotEmpty ? emailController.text : null,
+                  email: emailController.text.isNotEmpty
+                      ? emailController.text
+                      : null,
                 );
                 bool res = false;
                 if (model.value.id != null) {
@@ -49,10 +52,15 @@ class AddContact extends HookWidget {
                 if (res) GoRouter.of(context).pop();
               }
             },
-            style: ButtonStyle(backgroundColor: WidgetStatePropertyAll<Color>(ColorCode.colorList(context).secondary!)),
+            style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll<Color>(
+                    ColorCode.colorList(context).secondary!)),
             child: Text(
               "Save",
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorCode.colorList(context).customTextColor, fontWeight: FontWeight.bold, fontSize: 16),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: ColorCode.colorList(context).customTextColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16),
             ),
           ),
         ),
@@ -64,14 +72,20 @@ class AddContact extends HookWidget {
                 top: 30,
                 left: 0,
                 right: 0,
-                child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [ContactImagePicker(model: model)]),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [ContactImagePicker(model: model)]),
               ),
               Positioned(
                 bottom: 0,
                 child: Container(
                   height: context.height() / 1.8,
                   width: context.width(),
-                  decoration: BoxDecoration(borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)), color: ColorCode.colorList(context).secondary),
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30)),
+                      color: ColorCode.colorList(context).secondary),
                   padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
                   child: SingleChildScrollView(
                     child: Form(
@@ -84,7 +98,10 @@ class AddContact extends HookWidget {
                             controller: nameController,
                             hintText: "Enter name",
                             firstLetterCapital: true,
-                            prefix: Icon(Icons.person, size: 20, color: ColorCode.colorList(context).middleSecondary!),
+                            prefix: Icon(Icons.person,
+                                size: 20,
+                                color: ColorCode.colorList(context)
+                                    .middleSecondary!),
                             validator: (value) {
                               if (value == null || value.trim().isEmpty) {
                                 return 'Name is required';
@@ -96,8 +113,14 @@ class AddContact extends HookWidget {
                           CustomTextField(
                             controller: phoneController,
                             hintText: "Enter phone",
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(10)
+                            ],
                             textInputType: TextInputType.phone,
-                            prefix: Icon(Icons.phone, size: 20, color: ColorCode.colorList(context).middleSecondary!),
+                            prefix: Icon(Icons.phone,
+                                size: 20,
+                                color: ColorCode.colorList(context)
+                                    .middleSecondary!),
                             validator: (value) {
                               if (value == null || value.trim().isEmpty) {
                                 return 'Phone is required';
@@ -109,10 +132,14 @@ class AddContact extends HookWidget {
                             controller: emailController,
                             hintText: "Enter email (optional)",
                             textInputType: TextInputType.emailAddress,
-                            prefix: Icon(Icons.mail_rounded, size: 20, color: ColorCode.colorList(context).middleSecondary!),
+                            prefix: Icon(Icons.mail_rounded,
+                                size: 20,
+                                color: ColorCode.colorList(context)
+                                    .middleSecondary!),
                             validator: (value) {
                               if (value != null && value.trim().isNotEmpty) {
-                                final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+                                final emailRegex =
+                                    RegExp(r'^[^@]+@[^@]+\.[^@]+');
                                 if (!emailRegex.hasMatch(value)) {
                                   return 'Enter a valid email';
                                 }
