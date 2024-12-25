@@ -30,94 +30,90 @@ class ContactList extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      backgroundColor: ColorCode.colorList(context).secondary,
+      backgroundColor: ColorCode.colorList(context).middlePrimary,
       isHome: true,
       appBar: AppBar(
         backgroundColor: ColorCode.colorList(context).middlePrimary,
+        title: Text(
+          "Contacts",
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: ColorCode.colorList(context).secondary,
+              ),
+        ),
       ),
-      child: Obx(
-        () {
-          return Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 30),
-            child: Column(
-              spacing: 10,
-              children: [
-                if (contactVM.contactList.isEmpty)
-                  SizedBox(
-                    width: context.width(),
-                    height: context.height() - 200,
-                    child: Column(
-                      spacing: 5,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "0 Contacts",
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(color: ColorCode.colorList(context).customTextColor, fontSize: 18, fontWeight: FontWeight.w500),
-                        ),
-                        Row(
-                          spacing: 5,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Press",
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(color: ColorCode.colorList(context).customTextColor, fontSize: 14, fontWeight: FontWeight.w500),
-                            ),
-                            Icon(Icons.add_circle),
-                            Text(
-                              "to add new contact",
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(color: ColorCode.colorList(context).customTextColor, fontSize: 14, fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ...contactVM.contactList.map((contact) {
-                  return SizedBox(
-                    height: 80,
-                    width: context.width(),
-                    child: ListTile(
-                      onTap: () {
-                        context.pushNamed(
-                          RouteEnum.viewContact.name,
-                          extra: contact,
-                        );
-                      },
-                      leading: Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: ColorCode.colorList(context).middlePrimary,
-                          image: contact.image != null ? DecorationImage(image: FileImage(File(contact.image!)), fit: BoxFit.cover) : null,
-                        ),
-                        child: contact.image != null ? null : Icon(Icons.person, color: ColorCode.colorList(context).secondary),
-                      ),
-                      title: Text("${contact.name}"),
-                      subtitle: Text("${contact.phone}"),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
+      child: Container(
+        color: ColorCode.colorList(context).secondary,
+        child: Obx(
+          () {
+            return Padding(
+              padding: EdgeInsets.only(left: 20, right: 20, top: 30),
+              child: Column(
+                spacing: 10,
+                children: [
+                  if (contactVM.contactList.isEmpty)
+                    SizedBox(
+                      width: context.width(),
+                      height: context.height() - 200,
+                      child: Column(
+                        spacing: 5,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          InkWell(
-                              onTap: () async {
-                                _makeCall(context, "${contact.phone}");
-                              },
-                              child: Icon(Icons.phone)),
-                          10.width,
-                          InkWell(
-                              onTap: () async {
-                                await contactVM.deleteContact(contact);
-                              },
-                              child: Icon(Icons.delete)),
+                          Text(
+                            "0 Contacts",
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(color: ColorCode.colorList(context).customTextColor, fontSize: 18, fontWeight: FontWeight.w500),
+                          ),
+                          Row(
+                            spacing: 5,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Press",
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(color: ColorCode.colorList(context).customTextColor, fontSize: 14, fontWeight: FontWeight.w500),
+                              ),
+                              Icon(Icons.add_circle),
+                              Text(
+                                "to add new contact",
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(color: ColorCode.colorList(context).customTextColor, fontSize: 14, fontWeight: FontWeight.w500),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),
-                  );
-                })
-              ],
-            ),
-          );
-        },
+                  ...contactVM.contactList.map((contact) {
+                    return SizedBox(
+                      height: 80,
+                      width: context.width(),
+                      child: ListTile(
+                        onTap: () {
+                          context.pushNamed(
+                            RouteEnum.viewContact.name,
+                            extra: contact,
+                          );
+                        },
+                        leading: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: ColorCode.colorList(context).middlePrimary,
+                            image: contact.image != null ? DecorationImage(image: FileImage(File(contact.image!)), fit: BoxFit.cover) : null,
+                          ),
+                          child: contact.image != null ? null : Icon(Icons.person, color: ColorCode.colorList(context).secondary),
+                        ),
+                        title: Text("${contact.name}"),
+                        subtitle: Text("${contact.phone}"),
+                        trailing: InkWell(onTap: () async => _makeCall(context, "${contact.phone}"), child: Icon(Icons.phone)),
+                      ),
+                    );
+                  })
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

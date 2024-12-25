@@ -18,7 +18,7 @@ class AddGroupPopup extends HookWidget {
     final groupController = useTextEditingController();
     final selectedValue = useState(model.value.group ?? "");
     return AlertDialog(
-      backgroundColor: ColorCode.colorList(context).middleSecondary,
+      backgroundColor: Colors.blue[50],
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
       content: SizedBox(
         width: 300,
@@ -35,12 +35,13 @@ class AddGroupPopup extends HookWidget {
                     ...groupVM.groupList.map((e) => CheckboxListTile(
                           contentPadding: EdgeInsets.only(left: 10, right: 7),
                           value: selectedValue.value == e,
-                          tileColor: Colors.white54,
+                          tileColor: ColorCode.colorList(context).secondary,
                           title: Text(e.toTitleCase()),
                           activeColor: ColorCode.colorList(context).middlePrimary,
                           onChanged: (value) {
                             selectedValue.value = e;
                             model.value = model.value.copyWith(group: e);
+                            GoRouter.of(context).pop();
                           },
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10), // Apply BorderRadius here
@@ -52,17 +53,17 @@ class AddGroupPopup extends HookWidget {
             Row(
               spacing: 20,
               children: [
-                CustomTextField(width: 195, controller: groupController, hintText: "Add new group"),
+                CustomTextField(width: 195, controller: groupController, hintText: "Add new group", firstLetterCapital: true),
                 CustomIconButton(
                   icon: Icons.add,
-                  iconColor: ColorCode.colorList(context).middleSecondary,
+                  iconColor: ColorCode.colorList(context).secondary,
                   buttonColor: ColorCode.colorList(context).middlePrimary,
                   buttonSize: 48,
                   onTap: () async {
                     if (groupController.text != "") {
                       bool res = await groupVM.saveTask(groupController.text);
                       if (res == true) {
-                         model.value = model.value.copyWith(group:groupController.text);
+                        model.value = model.value.copyWith(group: groupController.text);
                         GoRouter.of(context).pop();
                       }
                       groupController.clear();

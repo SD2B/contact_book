@@ -13,7 +13,12 @@ class IconTextTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: context.width(),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: ColorCode.colorList(context).middleSecondary),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: ColorCode.colorList(context).middleSecondary!,
+          ),
+        ),
         height: 55,
         child: ListTile(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
